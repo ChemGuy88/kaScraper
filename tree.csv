@@ -1,0 +1,197 @@
+Analyzing categorical data,,
+,Welcome to AP Statistics,
+,Analyzing one categorical variable,
+,,"Individuals, variables, and categorical & quantitative data"
+,Two-way tables,
+,,Read two-way frequency tables
+,,Create two-way frequency tables
+,,Read two-way relative frequency tables
+,,Interpret two-way tables
+,Distributions in two-way tables,
+,,Identifying marginal and conditional distributions
+,,Marginal distributions
+,,Conditional distributions
+Displaying and describing quantitative data,,
+,Frequency tables and dot plots,
+,,Creating dot plots
+,,Reading dot plots & frequency tables
+,Histograms and stem-and-leaf plots,
+,Describing and comparing distributions,
+,,Shape of distributions
+,,Describing distributions
+,,Comparing distributions
+Summarizing quantitative data,,
+,Measuring center in quantitative data,
+,,Calculating the mean
+,,Calculating the median
+,,Calculating mean and median from data displays
+,More on mean and median,
+,,Missing value given the mean
+,,"Effects of shifting, adding, & removing a data point"
+,,Estimating mean and median in data displays
+,Measuring spread in quantitative data,
+,,Interquartile range (IQR)
+,,Sample standard deviation
+,,Visually assessing standard deviation
+,More on standard deviation (optional),
+,Box and whisker plots,
+,,Creating box plots
+,,Reading box plots
+,,Interpreting quartiles
+,,Identifying outliers
+Modeling data distributions,,
+,Percentiles (cumulative relative frequency),
+,,Calculating percentiles
+,Z-scores,
+,,Calculating z-scores
+,,Comparing with z-scores
+,Effects of linear transformations,
+,,Transforming data
+,Density curves,
+,,Properties of density curves
+,,Area under density curves
+,Normal distributions and the empirical rule,
+,,Empirical rule
+,Normal distribution calculations,
+,,Normal distribution: Area above or below a point
+,,Normal distribution: Area between two points
+,,Normal calculations in reverse
+Exploring bivariate numerical data,,
+,Making and describing scatterplots,
+,,Making appropriate scatter plots
+,,Positive and negative linear associations from scatter plots
+,,Describing trends in scatter plots
+,,Describing scatterplots
+,Correlation coefficients,
+,,Correlation coefficient intuition
+,Least-squares regression equations,
+,,Calculating and interpreting residuals
+,,Calculating the equation of the least-squares line
+,,Interpreting slope and y-intercept for linear models
+,,Using least-squares regression output
+,Assessing the fit in least-squares regression,
+,,Residual plots
+,,Influential points
+Study design,,
+,Sampling and observational studies,
+,,Identifying the population and sample
+,,Generalizability of results
+,,Bias in samples and surveys
+,Sampling methods,
+,,Simple random samples
+,,Sampling methods
+,Types of studies (experimental vs. observational),
+,,Observational studies versus experiments
+,Experiments,
+,,Experiment designs
+,,Finding errors in study conclusions
+,,Experiment design considerations
+Probability,,
+,"Randomness, probability, and simulation",
+,,Interpreting results of simulations
+,Addition rule,
+,,"Two-way tables, Venn diagrams, and probability"
+,Multiplication rule,
+,,Independent probability
+,,Probabilities of compound events
+,,Dependent probability
+,,"Probability of ""at least one"" success"
+,Conditional probability,
+,,Calculating conditional probability
+Random variables,,
+,Discrete random variables,
+,,Probability with discrete random variables
+,,Mean (expected value) of a discrete random variable
+,,Standard deviation of a discrete random variable
+,Continuous random variables,
+,,Probability in density curves
+,,Probability in normal density curves
+,Transforming random variables,
+,,Transforming random variables
+,Combining random variables,
+,,Combining random variables
+,,Combining normal random variables
+,Binomial random variables,
+,,Identifying binomial variables
+,,Binomial probability formula
+,,Calculating binomial probability
+,Binomial mean and standard deviation formulas,
+,,Mean and standard deviation of a binomial random variable
+,Geometric random variables,
+,,Binomial vs. geometric random variables
+,,Geometric probability
+,,Cumulative geometric probability
+Sampling distributions,,
+,What is a sampling distribution?,
+,,Biased and unbiased estimators
+,Sampling distribution of a sample proportion,
+,,The normal condition for sample proportions
+,,Mean and standard deviation of sample proportions
+,,Finding probabilities with sample proportions
+,Sampling distribution of a sample mean,
+,,Mean and standard deviation of sample means
+,,Sample means and the central limit theorem
+,,Finding probabilities with sample means
+Confidence intervals,,
+,Introduction to confidence intervals,
+,Confidence intervals for proportions,
+,,Conditions for a z interval for a proportion
+,,Finding the critical value z* for a desired confidence level
+,,Calculating a z interval for a proportion
+,,Sample size and margin of error in a z interval for p
+,Confidence intervals for means,
+,,Conditions for a t interval for a mean
+,,Finding the critical value t* for a desired confidence level
+,,Calculating a t interval for a mean
+,,Sample size and margin of error in a confidence interval for a mean
+Significance tests (hypothesis testing) ,,
+,The idea of significance tests,
+,,Writing null and alternative hypotheses
+,,Estimating P-values from simulations
+,Error probabilities and power,
+,,Type I vs Type II error
+,,Error probabilities and power
+,Testing hypotheses about a proportion,
+,,Writing hypotheses for a test about a proportion
+,,Conditions for a z test about a proportion
+,,Calculating the test statistic in a z test for a proportion
+,,Calculating the P-value in a z test for a proportion
+,,Making conclusions in a z test for a proportion
+,Testing hypotheses about a mean,
+,,Writing hypotheses for a test about a mean
+,,Conditions for a t test about a mean
+,,Calculating the test statistic in a t test for a mean
+,,Calculating the P-value in a t test for a mean
+,,Making conclusions in a t test for a mean
+Inference comparing two groups or populations,,
+,Confidence intervals for the difference between two proportions,
+,,Conditions for inference on two proportions
+,,Two-sample z interval for the difference of proportions
+,Testing the difference between two proportions,
+,,Writing hypotheses for testing the difference of proportions
+,,Test statistic in a two-sample z test for the difference of proportions
+,,P-value in a two-sample z test for the difference of proportions
+,,Making conclusions about the difference of proportions
+,Confidence intervals for the difference between two means,
+,Testing the difference between two means,
+Chi-square tests for categorical data,,
+,Chi-square goodness-of-fit tests,
+,,Expected counts in a goodness-of-fit test
+,,Conditions for a goodness-of-fit test
+,,Test statistic and P-value in a goodness-of-fit test
+,,Conclusions in a goodness-of-fit test
+,Chi-square tests for relationships,
+,,Expected counts in chi-squared tests with two-way tables
+,,Test statistic and P-value in chi-square tests with two-tables
+,,Making conclusions in chi-square tests for two-way tables
+More on regression,,
+,Inference about slope,
+,,Confidence interval for slope
+,,Test statistic for slope
+,,Making conclusions about slope
+,Transformations to achieve linearity,
+Prepare for the 2019 AP®︎ Statistics Exam,,
+,Prepare for the exam,
+,,Choosing an appropriate inference procedure
+AP®︎ Statistics Standards mappings,,
+,See how our course content aligns with AP®︎ Statistics Standards,
