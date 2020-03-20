@@ -2,12 +2,19 @@
 # -*- coding: utf-8 -*-
 
 '''
+    Contains functions used in analyzing data from KhanAcademy.org
 
-- Should encase workflow in a "with driver as driver" block
-- Wait for page to load: http://www.seleniumhq.org/docs/04_webdriver_advanced.jsp
+    There are two approaches to analyzing the data. The functions for both approaches are in this file.
+
+    (1) This one works: Copy and paste scores to a text file. Because pasting produces text formatted in a consistent pattern, it can be converted into a table. Then the analysis is easy.
+    (2) This one is not fully implement. A totally programmatic approach is difficult because expanding certain webpage elements cannot be simulated. If this could be overcome, then scraping the site would be easy.
+        2.1 This workflow should be encased in a "with driver as driver" block
+        2.2 Expanding does not seem to be a function of page loading times. Wait for page to load: http://www.seleniumhq.org/docs/04_webdriver_advanced.jsp
 '''
 
 import requests, sys, time, webbrowser #, winsound
+import numpy as np
+import pandas as pd
 from bs4 import BeautifulSoup
 from io import BytesIO
 from lxml import etree
@@ -177,6 +184,66 @@ def expTree(d, fpath):
                 lines.append(['','',ex])
     df = pd.DataFrame(lines)
     df.to_csv(fpath, sep=',', header=False, index=False)
+
+def tabText(fpath):
+    '''
+    '''
+
+    with open(fpath, 'r') as f:
+        text = f.read()
+
+    l = text.split('\n')
+
+    l = [i for i in l if i] # remove empty stirngs
+    l = l[1:] # remove index column header, "Students"
+    try:
+        numCols = 15 # To-do: determine programmatically. I should find the numbes and endashes first
+        # then cut those frmo the string, then, since the number of students is known ahead of time, cut n number of matches starting from the end. What's left are the columns.
+        J = numCols*2
+
+        # Create column names, the Khan Academy Assignments
+        cols = l[:J]
+        cols = np.array(cols)
+        cols = cols.reshape((numCols,2))
+        date = cols[:,1]
+        name = cols[:,0]
+        cols = [f'{x} ({y})' for x,y in zip(name,date)]
+        I = 70 # To-do: determine programmatically
+
+        # Create row/index names, the Khan Academy Students
+        indx = l[J:J+I]
+
+        # Create Pandas DataFrame
+        data = np.array(l[J+I:])
+        data = data.reshape((I,numCols))
+    except ValueError:
+        numCols = 13 # To-do: determine programmatically
+        J = numCols*2
+
+        # Create column names, the Khan Academy Assignments
+        cols = l[:J]
+        cols = np.array(cols)
+        cols = cols.reshape((numCols,2))
+        date = cols[:,1]
+        name = cols[:,0]
+        cols = [f'{x} ({y})' for x,y in zip(name,date)]
+        I = 70 # To-do: determine programmatically
+
+        # Create row/index names, the Khan Academy Students
+        indx = l[J:J+I]
+
+        # Create Pandas DataFrame
+        data = np.array(l[J+I:])
+        data = data.reshape((I,numCols))
+    df = pd.DataFrame(data, columns= cols, index= indx, dtype='str')
+
+    # Replace en dashes with NaNs
+    endash = '\N{EN DASH}'
+    df.replace(endash, '999', inplace=True)
+    df = df.astype('float')
+    df.replace(999.0, np.nan, inplace=True)
+
+    return df
 
 ########################################################################
 ### End of File ########################################################

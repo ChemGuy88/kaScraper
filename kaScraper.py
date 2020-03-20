@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 
 '''
-
-- Should encase workflow in a "with driver as driver" block
-- Wait for page to load: http://www.seleniumhq.org/docs/04_webdriver_advanced.jsp
+    Contains workspace for analyzing data from KhanAcademy.org. See funcs.py for project notes.
 '''
 
 import requests, sys
+import numpy as np
+import pandas as pd
 from bs4 import BeautifulSoup
 from importlib import reload
 try:
@@ -37,18 +37,49 @@ Headers = { 'User-Agent': UserAgent}
 #### Workspace #########################################################
 ########################################################################
 
+# Grade ka assignments via pasting
+workDir = '/Users/herman/Documents/kaGrader'
+l = []
+for i in range(1,6):
+    fpath = f'{workDir}/kaScores{i}.txt'
+    df = tabText(fpath)
+    l.append(df)
+
+df = pd.concat(l, axis=1)
+
+# Save scores as they appear on KA
+fpath = f'{workDir}/kaScores.csv'
+df.to_csv(fpath, sep=',')
+
+# Mark late assignments as zero
+cols = df.columns
+late = cols[23:]
+graded = df[late]
+graded.replace(np.nan, 0, inplace=True)
+
+
+# assignmentsMeans = df.mean(axis=0)
+studentMeans = graded.mean(axis=1)
+
+# Save scores after marking late
+fpath = f'{workDir}/kaGrades.csv'
+studentMeans.to_csv(fpath, sep=',', header='Average')
+
+# Test
+if False:
+    student = 'Sealy, Justin'
+    assignment = 'Create two-way frequency tables (9-Mar)'
+    x = df.loc[student][assignment]
+    print(f'Student "{student}" got a score of {x} on the assignment "{assignment}".')
+
 # load html from Selenium, file, or requests
-if True:
+if False:
     fpath = '/Users/herman/Documents/kaGrader/Assign content | Khan Academy.html'
     with open(fpath, 'r') as f:
         html = f.read()
 elif False:
     r = requests.get(URL, headers = Headers)
     html = r.text
-
-# Run functions
-d = makeTree(html)
-printTree(d)
 
 # Some notes about the html tags
 if False:
