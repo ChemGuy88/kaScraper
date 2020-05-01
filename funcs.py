@@ -217,7 +217,7 @@ def tabText(fpath):
         data = np.array(l[J+I:])
         data = data.reshape((I,numCols))
     except ValueError:
-        numCols = 13 # To-do: determine programmatically
+        numCols = 4 # To-do: determine programmatically
         J = numCols*2
 
         # Create column names, the Khan Academy Assignments

@@ -5,7 +5,7 @@
     Contains workspace for analyzing data from KhanAcademy.org. See funcs.py for project notes.
 '''
 
-import requests, sys
+import os, re, requests, sys
 import numpy as np
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -33,37 +33,75 @@ UserAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:56.0)'+\
             ' Gecko/20100101 Firefox/56.0'
 Headers = { 'User-Agent': UserAgent}
 
+
 ########################################################################
 #### Workspace #########################################################
 ########################################################################
 
 # Grade ka assignments via pasting
 workDir = '/Users/herman/Documents/kaGrader'
+dataDir = 'kaScores-Exam3'
+datapath = f'{workDir}/{dataDir}'
 l = []
-for i in range(1,6):
-    fpath = f'{workDir}/kaScores{i}.txt'
+for fname in os.listdir(datapath):
+    fpath = f'{datapath}/{fname}'
     df = tabText(fpath)
     l.append(df)
 
 df = pd.concat(l, axis=1)
 
+# Sort by due date
+cols = df.columns
+d = {}
+l = []
+for c in cols:
+    date = re.search('\(([a-zA-Z]+ [0-9]+)\)', c).groups()[0]
+    datetime = pd.to_datetime(f'{date} 2020', format = '%b %d %Y').toordinal()
+    d[c] = datetime
+    l.append((c, datetime))
+
+l = sorted(l, key= lambda x:x[1])
+newCols = [t[0] for t in l]
+dates = [t[1] for t in l]
+df = df[newCols]
+
 # Save scores as they appear on KA
 fpath = f'{workDir}/kaScores.csv'
 df.to_csv(fpath, sep=',')
 
-# Mark late assignments as zero
-cols = df.columns
-late = cols[23:]
-graded = df[late]
-graded.replace(np.nan, 0, inplace=True)
+# Determine indices for items past due
+dates = np.array(dates)
+today = pd.datetime.today().toordinal()
+today = [today] * len(dates)
+today = np.array(today)
+lateIndices = np.argwhere(dates < today)
 
+# New dataframe with late assignments as zero
+dueCols = cols[lateIndices]
+graded = df[dueCols.ravel()]
+graded = graded.replace(np.nan, 0)
 
-# assignmentsMeans = df.mean(axis=0)
+assignmentsMeans = df.mean(axis=0)
 studentMeans = graded.mean(axis=1)
 
 # Save scores after marking late
 fpath = f'{workDir}/kaGrades.csv'
 studentMeans.to_csv(fpath, sep=',', header='Average')
+
+# Grade subset
+if False:
+    assignments = ['Study design: Unit test (Apr 24)', 'Random variables: Quiz 4 (Apr 29)', 'Sampling distributions: Unit test (Apr 29)', 'Confidence intervals: Quiz 1 (Apr 29)']
+    subset = df[assignments]
+    subset = subset.replace(np.nan, 0)
+    weights = [9, 5, 9, 5]
+    assignments = dict(zip(assignments, weights))
+    for asg, value in assignments.items():
+        subset[asg] = subset[asg]/100 * value
+    # subset = subset.sum(axis=1) / np.sum(weights)
+    subset = subset.sum(axis=1)
+    subsetName = 'FinalExam'
+    fpath = f'{workDir}/{subsetName}.csv'
+    subset.to_csv(fpath, sep=',', header='Average')
 
 # Test
 if False:
