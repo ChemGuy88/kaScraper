@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 '''
-    Contains workspace for analyzing data from KhanAcademy.org. See funcs.py for project notes.
+Contains workspace for analyzing data from KhanAcademy.org. See funcs.py for project notes.
 '''
 
 import argparse
@@ -17,6 +17,7 @@ from pathlib import Path
 
 from importlib import reload
 try:
+    import funcs
     reload(funcs)
     from funcs import gradeKAScores
 except NameError as err:
@@ -48,11 +49,11 @@ workDir = os.path.join(userDir, 'Documents', 'kaGrader')
 
 
 def grader(kaScoresDir):
-    print('Grading scores from {kaScoresDir}')
+    print(f'Grading scores from {kaScoresDir}')
     _, hwGrade = gradeKAScores(kaScoresDir)
     kaGradespath = "/Users/herman/Documents/stemple 02 21Spring/kaGrades.csv"
     hwGrade.to_csv(kaGradespath, sep=',', header='hwAverage')
-    print('Homework grade has been saved in {kaGradespath}')
+    print(f'Homework grade has been saved in {kaGradespath}')
 
 
 ########################################################################
@@ -66,7 +67,7 @@ if __name__ == '__main__':
 
     parser.add_argument("--verbosity", help="increase output verbosity")
 
-    parser.add_argument("--gradehw", help="Grade the homework located in a given directory.")
+    parser.add_argument("--gradehw", help="Grade the homework located in a given directory.", metavar='kaScoresFolder')
 
     args = parser.parse_args()
 
