@@ -12,16 +12,15 @@
         2.2 Expanding does not seem to be a function of page loading times. Wait for page to load: http://www.seleniumhq.org/docs/04_webdriver_advanced.jsp
 '''
 
-import re, os, requests, sys, time, webbrowser #, winsound
+import os
+import re
 import numpy as np
 import pandas as pd
-from bs4 import BeautifulSoup
 from datetime import datetime as dt
 from io import BytesIO
 from lxml import etree
 from pathlib import Path
 from selenium import webdriver
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.expected_conditions import presence_of_element_located
@@ -84,8 +83,8 @@ def expandHtml():
         xpathWait = '//div[@class="_o77ufew"]'
         wait.until(presence_of_element_located((By.XPATH, xpathWait)))
 
-    coachBranch = '/coach/dashboard'
-    classBranch = '/coach/class/5816402088837120'
+    # coachBranch = '/coach/dashboard'
+    # classBranch = '/coach/class/5816402088837120'
     assignBranch = '/coach/class/5816402088837120/create-assignments'
     url = rootUrl + assignBranch
     driver.get(url)
@@ -229,7 +228,8 @@ def tabText(fpath):
 
     li = text.split('\n')
 
-    li = [i for i in li if i]  # remove empty stirngs; This produces a bug when tabulating assignments that have a checkmark since the checkmark is pasted as an empty string. One way to fix it is to replace the "\n" with "\n\N{EN DASH}" in the file by using regex "^\n" after the column header lines. Note that countDueDates and countCells works independent of empty strings, so we can use thouse counts to find where to begin the regex.
+    li = [i for i in li if i]  # remove empty strings; This produces a bug when tabulating assignments that have a checkmark since the checkmark is pasted as an empty string. One way to fix it is to replace the "\n" with "\n\N{EN DASH}" in the file by using regex "^\n" after the column header lines. Note that countDueDates and countCells works independent of empty strings, so we can use thouse counts to find where to begin the regex.
+    # 2021/03/11: I noticed the empty lines are only made when copying from Safari. Information pasted from Chrome skips the checkmark cells. Also, the regex is find: "^\n", replace: "100\n".
     li = li[1:]  # remove index column header, "Students"
 
     # Programmatically determine number of columns (assignments) and number of rows (students)
